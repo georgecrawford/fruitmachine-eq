@@ -1,0 +1,25 @@
+{
+	"name": "fruitmachine-eq",
+	"version": "0.0.1",
+	"description": "Element Queries helper for FT Fruitmachine",
+	"main": "index.js",
+	"dependencies": {
+		"fruitmachine": "0.7.0"
+	},
+	"directories": {
+		"example": "examples"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/georgecrawford/fruitmachine-eq.git"
+	},
+	"author": "George Crawford",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/georgecrawford/fruitmachine-eq/issues"
+	},
+	"homepage": "https://github.com/georgecrawford/fruitmachine-eq"
+}

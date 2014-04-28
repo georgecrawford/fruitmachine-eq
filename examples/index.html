@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Example: Helpers</title>
+		<style>
+			body {
+				background: #ddd;
+			}
+
+			.apple,
+			.banana {
+				width: 30%;
+				height: 30%;
+				padding: 10px;
+			}
+
+			.apple {
+				font-size: 30px;
+				background: rgba(255, 0, 0, 0.5);
+			}
+
+			.banana {
+				background: rgba(0, 255, 0, 0.5);
+			}
+
+			.apple:before, .apple:after {
+				display: block;
+				position: absolute;
+				padding: 5px;
+			}
+
+			.apple:before {
+				top: 0;
+				left: 0;
+			}
+
+			.apple:after {
+				bottom: 0;
+				right: 0;
+			}
+
+			.apple[matched-media~='short']:before {
+				content: 'short';
+			}
+
+			.apple[matched-media~='thin']:after {
+				content: 'thin';
+			}
+
+			#log {
+				font-family: monospace;
+				white-space: pre-line;
+				position: absolute;
+				left: 35%;
+			}
+
+
+
+		</style>
+
+		<script type="text/javascript" src="../node_modules/fruitmachine/build/fruitmachine.js"></script>
+		<script type="text/javascript" src="../lib/index.js"></script>
+
+	</head>
+	<body>
+
+		<div id="log">
+			LOG:
+		</div>
+
+		<script>
+
+			var logEl = document.getElementById('log');
+
+			function log(module, query, matches) {
+				logEl.innerHTML += module + ' query [' + query + '] ' + (matches ? 'matches' : 'doesn\'t match') + '\n';
+			}
+
+			var Apple = fruitmachine.define({
+				name: 'apple',
+				template: function() { return ''; },
+				helpers: [
+					eqHelper({
+						rules: {
+							thin: '(max-width: 200px)',
+							short: '(max-height: 200px)'
+						}
+					})
+				]
+			});
+
+			var Banana = fruitmachine.define({
+				name: 'banana',
+				template: function() { return 'NB: touchDOM is false for this module, so no DOM attributes are changed. However, events still fire.'; },
+				helpers: [
+					eqHelper({
+						rules: {
+							thin: '(max-width: 200px)',
+							short: '(max-height: 200px)'
+						},
+						touchDOM: false
+					})
+				]
+			});
+
+			var apple = new Apple()
+				.render()
+				.insertBefore(document.body)
+				.on('eq-change', log.bind(null, 'Apple'))
+				.setup();
+
+			var banana = new Banana()
+				.render()
+				.insertBefore(document.body)
+				.on('eq-change', log.bind(null, 'Banana'))
+				.setup();
+
+
+		</script>
+	</body>
+</html>
