@@ -3,9 +3,6 @@
 	"version": "0.0.1",
 	"description": "Element Queries helper for FT Fruitmachine",
 	"main": "index.js",
-	"dependencies": {
-		"fruitmachine": "0.7.0"
-	},
 	"directories": {
 		"example": "examples"
 	},
