@@ -4,6 +4,10 @@
 		<title>Example: Helpers</title>
 		<style>
 
+			* {
+				box-sizing: border-box;
+			}
+
 			.container {
 				position: absolute;
 				top: 0;
@@ -48,11 +52,11 @@
 
 			.sidebar[matched-media~=landscape] li {
 				display: inline-block;
-				padding: 5px 10px;
+				width: calc(100% / 6 - 10px);
 			}
 
 			.sidebar[matched-media~=portrait] ul {
-				width: 50%;
+				width: 100%;
 			}
 
 
@@ -74,7 +78,7 @@
 
 			var Sidebar = fruitmachine.define({
 				name: 'sidebar',
-				template: function() { return '<ul><li>One</li><li>Two</li><li>Three</li></ul>'; },
+				template: function() { return '<ul><li>One</li><li>Two</li><li>Three</li><li>Four</li><li>Five</li><li>Six</li></ul>'; },
 				helpers: [
 					eqHelper({
 						rules: {
