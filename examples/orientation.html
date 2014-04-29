@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Example: Helpers</title>
+		<style>
+
+			.container {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+
+			.content,
+			.sidebar {
+				height: 100%;
+			}
+
+			.content {
+				width: 60%;
+				background-color: lightblue;
+				float: left;
+			}
+
+			.sidebar {
+				width: 40%;
+				background-color: pink;
+				float: right;
+			}
+
+			.sidebar[matched-media~=landscape] {
+				background-color: lightgreen;
+			}
+
+			.sidebar ul {
+				padding: 0;
+				margin: 0;
+			}
+
+			.sidebar li {
+				list-style: none;
+				margin: 5px;
+				padding: 5px;
+				background: silver;
+				border: 1px solid grey;
+			}
+
+			.sidebar[matched-media~=landscape] li {
+				display: inline-block;
+				padding: 5px 10px;
+			}
+
+			.sidebar[matched-media~=portrait] ul {
+				width: 50%;
+			}
+
+
+		</style>
+
+		<script type="text/javascript" src="../node_modules/fruitmachine/build/fruitmachine.js"></script>
+		<script type="text/javascript" src="../lib/index.js"></script>
+
+	</head>
+	<body>
+
+		<div class="container">
+			<div class="content"></div>
+		</div>
+
+		<script>
+
+			var container = document.querySelector('.container');
+
+			var Sidebar = fruitmachine.define({
+				name: 'sidebar',
+				template: function() { return '<ul><li>One</li><li>Two</li><li>Three</li></ul>'; },
+				helpers: [
+					eqHelper({
+						rules: {
+							portrait: '(orientation: portrait)',
+							landscape: '(orientation: landscape)'
+						}
+					})
+				]
+			});
+
+			new Sidebar()
+				.render()
+				.insertBefore(container)
+				.setup();
+
+
+		</script>
+	</body>
+</html>
