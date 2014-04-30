@@ -13,8 +13,16 @@
 		"type": "git",
 		"url": "git://github.com/georgecrawford/fruitmachine-eq.git"
 	},
-	"author": "George Crawford",
-	"license": "MIT",
+	"author": {
+		"name": "George Crawford",
+		"email": "george.crawford@ft.com"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/ftlabs/fruitmachine-eq/blob/master/LICENSE"
+		}
+	],
 	"bugs": {
 		"url": "https://github.com/georgecrawford/fruitmachine-eq/issues"
 	},
