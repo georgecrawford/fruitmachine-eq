@@ -1,75 +1,88 @@
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Example: Helpers</title>
-		<style>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Example: Helpers</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
 
-			* {
-				box-sizing: border-box;
-			}
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
 
-			html,
-			body {
-				margin: 0;
-				padding: 0;
-			}
+            .box {
+                width: 20%;
+                height: 20%;
+                float: left;
+                border: 1px solid red;
+            }
 
-			.box {
-				width: 20%;
-				height: 20%;
-				float: left;
-				border: 1px solid red;
-			}
+            .top,
+            .bottom {
+                height: 50%;
+            }
 
-			.top,
-			.bottom {
-				height: 50%;
-			}
+            [matched-media~='small'] .top {
+                background-color: green;
+            }
 
-			[matched-media~=small] .top {
-				background-color: green;
-			}
+            [matched-media~='short'] .bottom {
+                background-color: red;
+            }
+        </style>
 
-			[matched-media~=short] .bottom {
-				background-color: red;
-			}
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/gh/ftlabs/fruitmachine@c0729682b4bd107e232ae1528d8ce282e0635932/build/fruitmachine.min.js"
+        ></script>
+        <script type="text/javascript" src="../lib/index.js"></script>
+    </head>
+    <body>
+        <script>
+            document.addEventListener('DOMContentLoaded', function _onLoad() {
+                for (var i = 0; i < 25; i++) {
+                    var Box = fruitmachine.define({
+                        name: 'box',
+                        template: function() {
+                            return '<div class="top"></div><div class="bottom"></div>';
+                        },
+                        helpers: [
+                            eqHelper({
+                                rules: {
+                                    small:
+                                        '(max-width: ' +
+                                        Math.max(
+                                            50,
+                                            Math.floor(
+                                                Math.random() *
+                                                    window.innerWidth
+                                            ) / 4
+                                        ) +
+                                        'px)',
+                                    short:
+                                        '(max-height: ' +
+                                        Math.max(
+                                            50,
+                                            Math.floor(
+                                                Math.random() *
+                                                    window.innerHeight
+                                            ) / 4
+                                        ) +
+                                        'px)',
+                                },
+                            }),
+                        ],
+                    });
 
-
-		</style>
-
-		<script type="text/javascript" src="https://cdn.rawgit.com/ftlabs/fruitmachine/c0729682b4bd107e232ae1528d8ce282e0635932/build/fruitmachine.min.js"></script>
-		<script type="text/javascript" src="../lib/index.js"></script>
-
-	</head>
-	<body>
-
-		<script>
-
-			document.addEventListener('DOMContentLoaded', function _onLoad() {
-
-				for (var i = 0; i < 25; i++) {
-					var Box = fruitmachine.define({
-						name: 'box',
-						template: function() { return '<div class="top"></div><div class="bottom"></div>'; },
-						helpers: [
-							eqHelper({
-								rules: {
-									small: '(max-width: ' + Math.max(50, Math.floor(Math.random() * window.innerWidth) / 4) + 'px)',
-									short: '(max-height: ' + Math.max(50, Math.floor(Math.random() * window.innerHeight) / 4) + 'px)'
-								}
-							})
-						]
-					});
-
-					new Box()
-						.render()
-						.insertBefore(document.body)
-						.setup();
-				}
-			});
-
-
-
-		</script>
-	</body>
+                    new Box()
+                        .render()
+                        .insertBefore(document.body)
+                        .setup();
+                }
+            });
+        </script>
+    </body>
 </html>

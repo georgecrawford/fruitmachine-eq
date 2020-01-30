@@ -1,101 +1,98 @@
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Example: Helpers</title>
-		<style>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Example: Helpers</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
 
-			* {
-				box-sizing: border-box;
-			}
+            .container {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
 
-			.container {
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-			}
+            .content,
+            .sidebar {
+                height: 100%;
+            }
 
-			.content,
-			.sidebar {
-				height: 100%;
-			}
+            .content {
+                width: 60%;
+                background-color: lightblue;
+                float: left;
+            }
 
-			.content {
-				width: 60%;
-				background-color: lightblue;
-				float: left;
-			}
+            .sidebar {
+                width: 40%;
+                background-color: pink;
+                float: right;
+            }
 
-			.sidebar {
-				width: 40%;
-				background-color: pink;
-				float: right;
-			}
+            .sidebar[matched-media~='landscape'] {
+                background-color: lightgreen;
+            }
 
-			.sidebar[matched-media~=landscape] {
-				background-color: lightgreen;
-			}
+            .sidebar ul {
+                padding: 0;
+                margin: 0;
+            }
 
-			.sidebar ul {
-				padding: 0;
-				margin: 0;
-			}
+            .sidebar li {
+                list-style: none;
+                margin: 5px;
+                padding: 5px;
+                background: silver;
+                border: 1px solid grey;
+            }
 
-			.sidebar li {
-				list-style: none;
-				margin: 5px;
-				padding: 5px;
-				background: silver;
-				border: 1px solid grey;
-			}
+            .sidebar[matched-media~='landscape'] li {
+                display: inline-block;
+                width: calc(100% / 6 - 10px);
+                min-width: 50px;
+            }
 
-			.sidebar[matched-media~=landscape] li {
-				display: inline-block;
-				width: calc(100% / 6 - 10px);
-				min-width: 50px;
-			}
+            .sidebar[matched-media~='portrait'] ul {
+                width: 100%;
+            }
+        </style>
 
-			.sidebar[matched-media~=portrait] ul {
-				width: 100%;
-			}
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/gh/ftlabs/fruitmachine@c0729682b4bd107e232ae1528d8ce282e0635932/build/fruitmachine.min.js"
+        ></script>
+        <script type="text/javascript" src="../lib/index.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="content"></div>
+        </div>
 
+        <script>
+            var container = document.querySelector('.container');
 
-		</style>
+            var Sidebar = fruitmachine.define({
+                name: 'sidebar',
+                template: function() {
+                    return '<ul><li>One</li><li>Two</li><li>Three</li><li>Four</li><li>Five</li><li>Six</li></ul>';
+                },
+                helpers: [
+                    eqHelper({
+                        rules: {
+                            portrait: '(orientation: portrait)',
+                            landscape: '(orientation: landscape)',
+                        },
+                    }),
+                ],
+            });
 
-		<script type="text/javascript" src="https://cdn.rawgit.com/ftlabs/fruitmachine/c0729682b4bd107e232ae1528d8ce282e0635932/build/fruitmachine.min.js"></script>
-		<script type="text/javascript" src="../lib/index.js"></script>
-
-	</head>
-	<body>
-
-		<div class="container">
-			<div class="content"></div>
-		</div>
-
-		<script>
-
-			var container = document.querySelector('.container');
-
-			var Sidebar = fruitmachine.define({
-				name: 'sidebar',
-				template: function() { return '<ul><li>One</li><li>Two</li><li>Three</li><li>Four</li><li>Five</li><li>Six</li></ul>'; },
-				helpers: [
-					eqHelper({
-						rules: {
-							portrait: '(orientation: portrait)',
-							landscape: '(orientation: landscape)'
-						}
-					})
-				]
-			});
-
-			new Sidebar()
-				.render()
-				.insertBefore(container)
-				.setup();
-
-
-		</script>
-	</body>
+            new Sidebar()
+                .render()
+                .insertBefore(container)
+                .setup();
+        </script>
+    </body>
 </html>

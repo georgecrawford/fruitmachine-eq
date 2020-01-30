@@ -1,191 +1,198 @@
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Example: RICG use-case</title>
-		<style>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Example: RICG use-case</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+            }
 
-			html, body {
-				margin: 0;
-			}
+            * {
+                box-sizing: border-box;
+                font-family: sans-serif;
+            }
 
-			* {
-				box-sizing: border-box;
-				font-family: sans-serif;
-			}
+            .group:after {
+                content: '';
+                display: table;
+                clear: both;
+            }
 
-			.group:after {
-			  content: "";
-			  display: table;
-			  clear: both;
-			}
+            .masthead,
+            .primary,
+            .sidebar,
+            .midriff,
+            .footer {
+                margin: 20px 20px 0;
+            }
 
-			.masthead, .primary, .sidebar, .midriff, .footer {
-				margin: 20px 20px 0;
-			}
+            .masthead,
+            .primary,
+            .sidebar,
+            .footer {
+                background-color: grey;
+            }
 
-			.masthead, .primary, .sidebar, .footer {
-				background-color: grey;
-			}
+            h2 {
+                color: white;
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: normal;
+                font-size: 1em;
+            }
 
-			h2 {
-				color: white;
-				text-align: center;
-				text-transform: uppercase;
-				font-weight: normal;
-				font-size: 1em;
-			}
+            .masthead,
+            .primary,
+            .footer {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: 100px;
+            }
 
-			.masthead, .primary, .footer {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				min-height: 100px;
-			}
+            .content {
+                display: flex;
+                justify-content: space-between;
+            }
 
-			.content {
-				display: flex;
-				justify-content: space-between;
-			}
+            .primary {
+                margin-right: 0;
+                flex: 2;
+            }
 
-			.primary {
-				margin-right: 0;
-				flex: 2;
-			}
+            .sidebar {
+                flex: 1;
+            }
 
-			.sidebar {
-				flex: 1;
-			}
+            .footer {
+                clear: both;
+            }
 
-			.footer {
-				clear: both;
-			}
+            .module {
+                padding: 10px;
+            }
 
-			.module {
-				padding: 10px;
-			}
+            .sidebar .module {
+                border-top: 3px solid white;
+            }
 
-			.sidebar .module {
-				border-top: 3px solid white;
-			}
+            .midriff .module {
+                background-color: grey;
+                width: calc(50% - 10px);
+                float: left;
+            }
 
-			.midriff .module {
-				background-color: grey;
-				width: calc(50% - 10px);
-				float: left;
-			}
+            .midriff .module:first-child {
+                margin-right: 10px;
+            }
 
-			.midriff .module:first-child {
-				margin-right: 10px;
-			}
+            .midriff .module:last-child {
+                margin-left: 10px;
+            }
 
-			.midriff .module:last-child {
-				margin-left: 10px;
-			}
+            .module-image {
+                width: 100%;
+            }
 
-			.module-image {
-				width: 100%;
-			}
+            .module-header {
+                font-weight: bold;
+                font-size: 1.2em;
+            }
 
-			.module-header {
-				font-weight: bold;
-				font-size: 1.2em;
-			}
+            .module-text {
+                margin: 10px 0;
+            }
 
-			.module-text {
-				margin: 10px 0;
-			}
+            .module-posted {
+                text-transform: uppercase;
+                color: #666;
+                font-size: 0.9em;
+            }
 
-			.module-posted {
-				text-transform: uppercase;
-				color: #666;
-				font-size: 0.9em;
-			}
+            .module-date {
+                font-weight: bold;
+                color: #222;
+            }
 
-			.module-date {
-				font-weight: bold;
-				color: #222;
-			}
+            .module[matched-media~='a'] .module-posted,
+            .module[matched-media~='a'] .module-rating {
+                width: 50%;
+                float: left;
+                margin-bottom: 10px;
+            }
 
-			.module[matched-media~=a] .module-posted, .module[matched-media~=a] .module-rating {
-				width: 50%;
-				float: left;
-				margin-bottom: 10px;
-			}
+            .module[matched-media~='a'] .module-header {
+                margin: 10px 0;
+            }
 
-			.module[matched-media~=a] .module-header {
-				margin: 10px 0;
-			}
+            .module[matched-media~='b'] .module-image {
+                float: left;
+                width: 40%;
+            }
 
-			.module[matched-media~=b] .module-image {
-				float: left;
-				width: 40%;
-			}
+            .module[matched-media~='b'] .module-content {
+                float: left;
+                width: calc(60% - 10px);
+                padding-left: 10px;
+            }
+        </style>
 
-			.module[matched-media~=b] .module-content {
-				float: left;
-				width: calc(60% - 10px);
-				padding-left: 10px;
-			}
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/gh/ftlabs/fruitmachine@c0729682b4bd107e232ae1528d8ce282e0635932/build/fruitmachine.min.js"
+        ></script>
+        <script type="text/javascript" src="../lib/index.js"></script>
+    </head>
+    <body>
+        <div class="masthead"><h2>Masthead</h2></div>
+        <div class="content group">
+            <div class="primary"><h2>Primary</h2></div>
+            <div class="sidebar">
+                <h2>Sidebar</h2>
+            </div>
+        </div>
+        <div class="midriff group"></div>
+        <div class="footer"><h2>Footer</h2></div>
 
+        <script>
+            function insertModule(el) {
+                return new Module({
+                    helpers: [
+                        eqHelper({
+                            rules: {
+                                a: '(max-width: 280px)',
+                                b: '(min-width: 281px)',
+                            },
+                        }),
+                    ],
+                })
+                    .render()
+                    .insertBefore(el)
+                    .setup();
+            }
 
-		</style>
+            var Module = fruitmachine.define({
+                name: 'module',
+                classes: ['group'],
+                template: function() {
+                    return (
+                        '<img class="module-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQAQMAAABI+4zbAAAABlBMVEXMzMzMzMy+G0qZAAAE+UlEQVR4nO2YS7KjNhSGRTFgyA6sLWQBKrwtD6g2VRlk2DvobCSVZinsIAwZOFfhPATCHLh0epTU/1XZ5nH4dAxCL+cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+C/jIP1XsZPfjLPj+kt84mqdjnDhKT8fYm2GBvoooJVbRLLGKMUrUh+5OpqulrzpKiXe7RB+/k6uMf0WJ/v4yXS8JfnJJz7/jYMTce3cnx0hbvBstVcGuZ1dQ9vNXZWX/nHOiEntXD7J77w5dHxzgykn3rRhHuZWj/JW6N1wlxRVzMn4uqZpL/WLE6MP9IpH0ocgd1UuDqST63I0YvfAlH4ourbpT/aHB9KHc6PMe08vvJLmVg+S2ow4aTCV5Z96JWvQF5dKo2nLdggZTZJMlkeHlh/KhbVa3hqsJKXiSAL7irbzMVasrGK6wuB7iKvauRl29/IU6O7bhEVLBLevkrryVJz/876tOSr4ZrimkQoLe0L3roa5OhKzxhmsMqeBGNfsnpK5aXc2BqxjI04qrOHBppnyf5psWlp0tZR9SwTe97Y9z16CubhdWrS6vrl3NSU/Dq6s9cnXkmiS0PHAN8nvTnYdcuHPVnPEom1yB9rXwxPULH3Lp/I+6RnVxLG+W3d7ViWtXo+Wwnphd0+pq101KIqSbW3fVBZdTV1ZuegyP1VWpa/d2JFdQ17ge9MuXoycY0g2ZXd2Ry4+2i1NKf2S84Kq6krtaw8X/RCtRMVxyzV3xYLq4Rk5L+ldccxc8JtekLr6G7nR6Larc1Ytr1wJU3Qd3V4aLckoN8Xz1BdevE/fGlqtdq1ftrrh+G7jblHs8FbmrWauXZ1eprvrA9bXjblNcD3Hpi+XX+FvmKtW1a+Wq3x13m5ZrviRVr3DJ9c1xt265qn5pox6XXDRMKG3XfDi16dMVV03Rs8FyFePSB46XXKOEWi43pepFB666JtvVpupFL9UFF59+2K4mVa8fcbW2y6fqRRX9gqs/cdVpQkCXXXUF8x2SMSon6K68Q8llvds09BZu7sq7LUU0B65UvcK/cG3a1Syvx8Z13K7KYdO13K/p5131nxo1/rwr1S92XHcZ/fZa78vkOu+3T13pfeT96y5jnLO2E7zfuM/GOWnIYo3llvaLptGRZsfn468z19KuXnSldL262sy1tPeLa1LXcOIK5jg664f00vNxdCrCGt/7zTv3+fh+cXXiajJX1m+rq1XXaLpSutYcJhtP5K7DOUwqQuZWnTxPrYXZOMct7Q5/aedluiZJoNY5X7OcyiaJy5yvlZSM+eMkXzIX1VslTzsfF+rBm/wJmYsO7h0twphv5+NVdX0y39apM2d8U4E8oc04Wlx8SNcBUgOQ0UgRxprCZny/uk7WFNLhSXLktY5xOZNVsGWtY9C1js69Q0spdLiVfMizDlfz0oP8AT5CFxgTaeogvWTBay/r2tBmniauQteGyGetDY2y/DTnR5u07SWXzfxRK8pLVseo4zQWDMuXLIHNgxRP+cyhz/2dSK6n41W7+YrytQ8pYsdjw7kv5CVKP5b2oii77oP0mbHz1sLWk+dDtI7J64Rzu2eUmFz1soBqrj16XTJVRxkPlmGDljTkF71Rah5eS3qaUeklleSXi95JYzJt24x3Ni+5314EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPyv+QcKunmz/PMz7AAAAABJRU5ErkJggg==" />' +
+                        '<div class="module-content">' +
+                        '<div class="module-header">Lorem Ipsum Dolor Sit Amet</div>' +
+                        '<div class="module-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</div>' +
+                        '<div class="module-posted">Posted: <span class="module-date">1/13/2014</span></div>' +
+                        '<div class="module-rating">&#9733;&#9733;&#9733;&#9733;&#9733; (3)</div>' +
+                        '</div>'
+                    );
+                },
+            });
 
-		<script type="text/javascript" src="https://cdn.rawgit.com/ftlabs/fruitmachine/c0729682b4bd107e232ae1528d8ce282e0635932/build/fruitmachine.min.js"></script>
-		<script type="text/javascript" src="../lib/index.js"></script>
+            insertModule(document.querySelector('.sidebar'));
 
-	</head>
-	<body>
-
-		<div class="masthead"><h2>Masthead</h2></div>
-		<div class="content group">
-			<div class="primary"><h2>Primary</h2></div>
-			<div class="sidebar">
-				<h2>Sidebar</h2>
-			</div>
-		</div>
-		<div class="midriff group"></div>
-		<div class="footer"><h2>Footer</h2></div>
-
-		<script>
-
-			function insertModule(el) {
-				return new Module({
-					helpers: [
-						eqHelper({
-							rules: {
-								a: '(max-width: 280px)',
-								b: '(min-width: 281px)'
-							}
-						})
-					]
-				})
-				.render()
-				.insertBefore(el)
-				.setup();
-			}
-
-			var Module = fruitmachine.define({
-				name: 'module',
-				classes: [
-					'group'
-				],
-				template: function() {
-					return '<img class="module-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQAQMAAABI+4zbAAAABlBMVEXMzMzMzMy+G0qZAAAE+UlEQVR4nO2YS7KjNhSGRTFgyA6sLWQBKrwtD6g2VRlk2DvobCSVZinsIAwZOFfhPATCHLh0epTU/1XZ5nH4dAxCL+cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+C/jIP1XsZPfjLPj+kt84mqdjnDhKT8fYm2GBvoooJVbRLLGKMUrUh+5OpqulrzpKiXe7RB+/k6uMf0WJ/v4yXS8JfnJJz7/jYMTce3cnx0hbvBstVcGuZ1dQ9vNXZWX/nHOiEntXD7J77w5dHxzgykn3rRhHuZWj/JW6N1wlxRVzMn4uqZpL/WLE6MP9IpH0ocgd1UuDqST63I0YvfAlH4ourbpT/aHB9KHc6PMe08vvJLmVg+S2ow4aTCV5Z96JWvQF5dKo2nLdggZTZJMlkeHlh/KhbVa3hqsJKXiSAL7irbzMVasrGK6wuB7iKvauRl29/IU6O7bhEVLBLevkrryVJz/876tOSr4ZrimkQoLe0L3roa5OhKzxhmsMqeBGNfsnpK5aXc2BqxjI04qrOHBppnyf5psWlp0tZR9SwTe97Y9z16CubhdWrS6vrl3NSU/Dq6s9cnXkmiS0PHAN8nvTnYdcuHPVnPEom1yB9rXwxPULH3Lp/I+6RnVxLG+W3d7ViWtXo+Wwnphd0+pq101KIqSbW3fVBZdTV1ZuegyP1VWpa/d2JFdQ17ge9MuXoycY0g2ZXd2Ry4+2i1NKf2S84Kq6krtaw8X/RCtRMVxyzV3xYLq4Rk5L+ldccxc8JtekLr6G7nR6Larc1Ytr1wJU3Qd3V4aLckoN8Xz1BdevE/fGlqtdq1ftrrh+G7jblHs8FbmrWauXZ1eprvrA9bXjblNcD3Hpi+XX+FvmKtW1a+Wq3x13m5ZrviRVr3DJ9c1xt265qn5pox6XXDRMKG3XfDi16dMVV03Rs8FyFePSB46XXKOEWi43pepFB666JtvVpupFL9UFF59+2K4mVa8fcbW2y6fqRRX9gqs/cdVpQkCXXXUF8x2SMSon6K68Q8llvds09BZu7sq7LUU0B65UvcK/cG3a1Syvx8Z13K7KYdO13K/p5131nxo1/rwr1S92XHcZ/fZa78vkOu+3T13pfeT96y5jnLO2E7zfuM/GOWnIYo3llvaLptGRZsfn468z19KuXnSldL262sy1tPeLa1LXcOIK5jg664f00vNxdCrCGt/7zTv3+fh+cXXiajJX1m+rq1XXaLpSutYcJhtP5K7DOUwqQuZWnTxPrYXZOMct7Q5/aedluiZJoNY5X7OcyiaJy5yvlZSM+eMkXzIX1VslTzsfF+rBm/wJmYsO7h0twphv5+NVdX0y39apM2d8U4E8oc04Wlx8SNcBUgOQ0UgRxprCZny/uk7WFNLhSXLktY5xOZNVsGWtY9C1js69Q0spdLiVfMizDlfz0oP8AT5CFxgTaeogvWTBay/r2tBmniauQteGyGetDY2y/DTnR5u07SWXzfxRK8pLVseo4zQWDMuXLIHNgxRP+cyhz/2dSK6n41W7+YrytQ8pYsdjw7kv5CVKP5b2oii77oP0mbHz1sLWk+dDtI7J64Rzu2eUmFz1soBqrj16XTJVRxkPlmGDljTkF71Rah5eS3qaUeklleSXi95JYzJt24x3Ni+5314EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPyv+QcKunmz/PMz7AAAAABJRU5ErkJggg==" />' +
-					'<div class="module-content">' +
-						'<div class="module-header">Lorem Ipsum Dolor Sit Amet</div>' +
-						'<div class="module-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</div>' +
-						'<div class="module-posted">Posted: <span class="module-date">1/13/2014</span></div>' +
-						'<div class="module-rating">&#9733;&#9733;&#9733;&#9733;&#9733; (3)</div>' +
-					'</div>';
-				}
-			});
-
-			insertModule(document.querySelector('.sidebar'));
-
-			var midriff = document.querySelector('.midriff');
-			insertModule(midriff);
-			insertModule(midriff);
-
-		</script>
-	</body>
+            var midriff = document.querySelector('.midriff');
+            insertModule(midriff);
+            insertModule(midriff);
+        </script>
+    </body>
 </html>
